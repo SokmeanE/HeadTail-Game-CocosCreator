@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "light_bulb_05",
+    "texture": "3043c731-1519-4316-96f1-501537d5d415",
+    "atlas": "",
+    "rect": [
+      23,
+      0,
+      922,
+      1080
+    ],
+    "offset": [
+      2,
+      11
+    ],
+    "originalSize": [
+      964,
+      1102
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

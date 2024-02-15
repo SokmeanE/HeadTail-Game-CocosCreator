@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "_01_gold_feather",
+    "texture": "9c231f49-dcd3-4410-9700-32c11473be41",
+    "atlas": "",
+    "rect": [
+      10,
+      19,
+      289,
+      858
+    ],
+    "offset": [
+      -2,
+      -4
+    ],
+    "originalSize": [
+      313,
+      888
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

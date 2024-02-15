@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "_02_greyscale_feather",
+    "texture": "fcfbb47c-3975-410a-a07f-8891e166ab3f",
+    "atlas": "",
+    "rect": [
+      64,
+      23,
+      185,
+      854
+    ],
+    "offset": [
+      0,
+      -6
+    ],
+    "originalSize": [
+      313,
+      888
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "startSign",
+    "texture": "16e44175-7ae7-40d8-82ba-c5959b9c409a",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      437,
+      512
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      437,
+      512
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}
