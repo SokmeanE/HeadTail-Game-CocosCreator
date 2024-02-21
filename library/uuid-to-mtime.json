@@ -659,11 +659,6 @@
     "meta": 1708424078888,
     "relativePath": "Prefab/resultPrefabFinal.prefab"
   },
-  "f2d72c29-cb94-41cd-ae63-07304a7fd64c": {
-    "asset": 1708427734137,
-    "meta": 1708427745082,
-    "relativePath": "Scripts/PrefabForResult.ts"
-  },
   "cb0b4681-d4f9-487f-9666-0b550235fe35": {
     "asset": 1708427763787,
     "meta": 1708427763794,
@@ -674,19 +669,24 @@
     "meta": 1708427780894,
     "relativePath": "Animation"
   },
+  "f2d72c29-cb94-41cd-ae63-07304a7fd64c": {
+    "asset": 1708519343017,
+    "meta": 1708519344605,
+    "relativePath": "Scripts/PrefabForResult.ts"
+  },
   "1308318d-9227-4f18-ac0d-c90effb4744b": {
-    "asset": 1708510096261,
-    "meta": 1708510178708,
+    "asset": 1708519424693,
+    "meta": 1708519430080,
     "relativePath": "Scripts/mainGame.ts"
   },
-  "f987f25a-2628-4f76-8218-3c260cb7fc9c": {
-    "asset": 1708510071998,
-    "meta": 1708510178762,
-    "relativePath": "Scripts/result.ts"
-  },
   "19a5afcd-06b9-4a39-ba10-e2b23d34fab5": {
-    "asset": 1708510082517,
-    "meta": 1708510178772,
+    "asset": 1708519415251,
+    "meta": 1708519430127,
     "relativePath": "Scripts/startGame.ts"
+  },
+  "f987f25a-2628-4f76-8218-3c260cb7fc9c": {
+    "asset": 1708519603483,
+    "meta": 1708519605397,
+    "relativePath": "Scripts/result.ts"
   }
 }

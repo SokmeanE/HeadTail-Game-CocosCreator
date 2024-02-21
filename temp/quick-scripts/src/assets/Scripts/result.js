@@ -67,7 +67,6 @@ var Result = /** @class */ (function (_super) {
             // Instantiate the prefab
             var resultItem = cc.instantiate(_this.resultPrefab);
             resultItem.x = 0;
-            console.log(resultItem.x, 'x position');
             // updateResult 
             _this.showTable(resultItem, result);
             var row = Math.floor(index / index - 1);
