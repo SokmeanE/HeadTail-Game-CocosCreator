@@ -24,9 +24,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
-var NewClass = /** @class */ (function (_super) {
-    __extends(NewClass, _super);
-    function NewClass() {
+var MainGame = /** @class */ (function (_super) {
+    __extends(MainGame, _super);
+    function MainGame() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.playerName = null;
         _this.showAttempt = null;
@@ -51,8 +51,7 @@ var NewClass = /** @class */ (function (_super) {
         _this.results = [];
         return _this;
     }
-    // LIFE-CYCLE CALLBACKS:
-    NewClass.prototype.onLoad = function () {
+    MainGame.prototype.onLoad = function () {
         //get player name
         this.getPlayerName();
         this.playerScore = 100;
@@ -66,11 +65,11 @@ var NewClass = /** @class */ (function (_super) {
         //go botton can't click unit the gold/grey has been selected
         this.choiceBtn.getComponent(cc.Button).interactable = false;
     };
-    NewClass.prototype.getPlayerName = function () {
+    MainGame.prototype.getPlayerName = function () {
         //get player name from localstorage which pass from the previous scene
         this.playerName.string = cc.sys.localStorage.getItem('player').toString();
     };
-    NewClass.prototype.greyBtn = function () {
+    MainGame.prototype.greyBtn = function () {
         //if click set choice to grey
         this.choice = "Grey";
         //check remark
@@ -81,7 +80,7 @@ var NewClass = /** @class */ (function (_super) {
         this.gold.getComponent(cc.Button).interactable = false;
         this.choiceBtn.getComponent(cc.Button).interactable = true;
     };
-    NewClass.prototype.goldBtn = function () {
+    MainGame.prototype.goldBtn = function () {
         //if click set choice to gold
         this.choice = "Gold";
         //check remark
@@ -93,7 +92,7 @@ var NewClass = /** @class */ (function (_super) {
         this.grey.getComponent(cc.Button).interactable = false;
         this.choiceBtn.getComponent(cc.Button).interactable = true;
     };
-    NewClass.prototype.goBtn = function () {
+    MainGame.prototype.goBtn = function () {
         var _this = this;
         this.node.removeChild(this.checkMark);
         //deduction 10 for play
@@ -111,10 +110,8 @@ var NewClass = /** @class */ (function (_super) {
         }
         this.choiceBtn.getComponent(cc.Button).interactable = false;
     };
-    NewClass.prototype.playAnimation = function () {
-        //new logic
-        console.log('play animation');
-        //new logic
+    MainGame.prototype.playAnimation = function () {
+        //random the results
         var result = Math.random();
         if (result >= 0.5) {
             this.randomChoice = "Gold";
@@ -159,7 +156,7 @@ var NewClass = /** @class */ (function (_super) {
         }
         this.compareChoice(this.choice);
     };
-    NewClass.prototype.compareChoice = function (choice) {
+    MainGame.prototype.compareChoice = function (choice) {
         var _this = this;
         this.winLose();
         var winLostLabel = this.winLoseNode.getComponent(cc.Label);
@@ -190,23 +187,23 @@ var NewClass = /** @class */ (function (_super) {
         }
     };
     //display win or lost
-    NewClass.prototype.winLose = function () {
+    MainGame.prototype.winLose = function () {
         this.winLoseNode = cc.instantiate(this.winLosePrefab);
-        this.winLoseNode.setPosition(0, 160, -1);
+        this.winLoseNode.setPosition(0, 160, 0);
         this.node.addChild(this.winLoseNode);
     };
     //add score
-    NewClass.prototype.gainScore = function () {
+    MainGame.prototype.gainScore = function () {
         this.playerScore += 20;
         this.score.string = "Score: " + this.playerScore.toString();
     };
     //deduct score 
-    NewClass.prototype.deduction = function () {
+    MainGame.prototype.deduction = function () {
         this.playerScore -= 10;
         this.score.string = "Score: " + this.playerScore.toString();
     };
     //spinAgain Button
-    NewClass.prototype.spinAgain = function () {
+    MainGame.prototype.spinAgain = function () {
         //hide the win, lose and spin button
         this.node.removeChild(this.winLoseNode);
         this.spinAgainBtn.active = false;
@@ -215,62 +212,57 @@ var NewClass = /** @class */ (function (_super) {
         this.gold.getComponent(cc.Button).interactable = true;
     };
     //store score
-    NewClass.prototype.storeRes = function () {
+    MainGame.prototype.storeRes = function () {
         cc.sys.localStorage.setItem('playerScore', this.playerScore);
-        console.log('com arrrr: ', this.playerScore);
     };
-    NewClass.prototype.newScene = function () {
-        var _this = this;
+    MainGame.prototype.newScene = function () {
         cc.sys.localStorage.setItem('results', JSON.stringify(this.results));
-        cc.director.loadScene('final'), function () {
-            return cc.game.emit('resultData', _this.results);
-        };
-        console.log('emit final', this.results);
+        cc.director.loadScene('final');
     };
-    NewClass.prototype.nextScene = function () {
+    MainGame.prototype.nextScene = function () {
         this.newScene();
     };
     __decorate([
         property(cc.Label)
-    ], NewClass.prototype, "playerName", void 0);
+    ], MainGame.prototype, "playerName", void 0);
     __decorate([
         property(cc.Label)
-    ], NewClass.prototype, "showAttempt", void 0);
+    ], MainGame.prototype, "showAttempt", void 0);
     __decorate([
         property(cc.Node)
-    ], NewClass.prototype, "grey", void 0);
+    ], MainGame.prototype, "grey", void 0);
     __decorate([
         property(cc.Node)
-    ], NewClass.prototype, "gold", void 0);
+    ], MainGame.prototype, "gold", void 0);
     __decorate([
         property(cc.Node)
-    ], NewClass.prototype, "choiceBtn", void 0);
+    ], MainGame.prototype, "choiceBtn", void 0);
     __decorate([
         property(cc.Prefab)
-    ], NewClass.prototype, "winLosePrefab", void 0);
+    ], MainGame.prototype, "winLosePrefab", void 0);
     __decorate([
         property(cc.Node)
-    ], NewClass.prototype, "spinAgainBtn", void 0);
+    ], MainGame.prototype, "spinAgainBtn", void 0);
     __decorate([
         property(cc.Node)
-    ], NewClass.prototype, "spinFeather", void 0);
+    ], MainGame.prototype, "spinFeather", void 0);
     __decorate([
         property(cc.Toggle)
-    ], NewClass.prototype, "isSpeedUp", void 0);
+    ], MainGame.prototype, "isSpeedUp", void 0);
     __decorate([
         property(cc.Label)
-    ], NewClass.prototype, "speedText", void 0);
+    ], MainGame.prototype, "speedText", void 0);
     __decorate([
         property(cc.Prefab)
-    ], NewClass.prototype, "checkMarkPrefab", void 0);
+    ], MainGame.prototype, "checkMarkPrefab", void 0);
     __decorate([
         property(cc.Label)
-    ], NewClass.prototype, "score", void 0);
-    NewClass = __decorate([
+    ], MainGame.prototype, "score", void 0);
+    MainGame = __decorate([
         ccclass
-    ], NewClass);
-    return NewClass;
+    ], MainGame);
+    return MainGame;
 }(cc.Component));
-exports.default = NewClass;
+exports.default = MainGame;
 
 cc._RF.pop();

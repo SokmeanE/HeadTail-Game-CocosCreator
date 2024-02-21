@@ -24,21 +24,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
-var NewClass = /** @class */ (function (_super) {
-    __extends(NewClass, _super);
-    function NewClass() {
+var StartGame = /** @class */ (function (_super) {
+    __extends(StartGame, _super);
+    function StartGame() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.playerName = null;
         _this.player = ' ';
         _this.startBtn = null;
         return _this;
     }
-    // LIFE-CYCLE CALLBACKS:
-    NewClass.prototype.storePlayerName = function () {
+    StartGame.prototype.storePlayerName = function () {
         this.player = this.playerName.string;
         cc.sys.localStorage.setItem('player', this.player);
     };
-    NewClass.prototype.startButton = function () {
+    StartGame.prototype.startButton = function () {
         if (this.player.length > 0) {
             cc.director.loadScene('game');
             this.storePlayerName();
@@ -46,15 +45,15 @@ var NewClass = /** @class */ (function (_super) {
     };
     __decorate([
         property(cc.EditBox)
-    ], NewClass.prototype, "playerName", void 0);
+    ], StartGame.prototype, "playerName", void 0);
     __decorate([
         property(cc.Button)
-    ], NewClass.prototype, "startBtn", void 0);
-    NewClass = __decorate([
+    ], StartGame.prototype, "startBtn", void 0);
+    StartGame = __decorate([
         ccclass
-    ], NewClass);
-    return NewClass;
+    ], StartGame);
+    return StartGame;
 }(cc.Component));
-exports.default = NewClass;
+exports.default = StartGame;
 
 cc._RF.pop();

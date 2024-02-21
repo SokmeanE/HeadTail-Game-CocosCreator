@@ -55,7 +55,7 @@
                 "width": 923.984375,
                 "height": 441,
                 "type": "panel",
-                "active": 1,
+                "active": 0,
                 "children": [
                   "console",
                   "timeline",
@@ -86,12 +86,13 @@
         "inspector",
         "cocos-services"
       ]
-    }
+    },
+    "window-1708506971720": {}
   },
   "panels": {
     "preferences": {
-      "x": 616,
-      "y": 249,
+      "x": 406,
+      "y": 259,
       "width": 584,
       "height": 554
     },

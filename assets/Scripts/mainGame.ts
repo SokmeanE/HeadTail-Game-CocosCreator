@@ -1,7 +1,7 @@
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class MainGame extends cc.Component {
 
     @property(cc.Label)
     playerName: cc.Label = null;
@@ -47,9 +47,6 @@ export default class NewClass extends cc.Component {
     randomGold: number = 0;
     randomGrey: number = 0;
     results: any[] = [];
-    
-
-    // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
         //get player name
@@ -65,8 +62,7 @@ export default class NewClass extends cc.Component {
 
         //instance prefab
         this.checkMark = cc.instantiate(this.checkMarkPrefab);
-        
-
+    
         //go botton can't click unit the gold/grey has been selected
         this.choiceBtn.getComponent(cc.Button).interactable = false;
 
@@ -100,7 +96,6 @@ export default class NewClass extends cc.Component {
         this.checkMark.setPosition(360, -215, 0); 
         this.checkMark.angle = -10;
 
-
         //interactable button
         this.gold.getComponent(cc.Button).interactable = false;
         this.grey.getComponent(cc.Button).interactable = false;
@@ -118,7 +113,6 @@ export default class NewClass extends cc.Component {
         //onclick play aniamtion
         this.playAnimation();
         
-        
         // check attempt
             if(this.attempt == 0){
                 this.storeRes();
@@ -130,10 +124,7 @@ export default class NewClass extends cc.Component {
     }
 
     playAnimation() {
-
-        //new logic
-        console.log('play animation');
-        //new logic
+        //random the results
         let result = Math.random();
         if(result >= 0.5){
             this.randomChoice = "Gold";
@@ -216,7 +207,7 @@ export default class NewClass extends cc.Component {
     //display win or lost
     winLose(){
         this.winLoseNode = cc.instantiate(this.winLosePrefab);
-        this.winLoseNode.setPosition(0,160,-1);
+        this.winLoseNode.setPosition(0,160,0);
         this.node.addChild(this.winLoseNode);
     }
 
@@ -231,7 +222,7 @@ export default class NewClass extends cc.Component {
         this.playerScore -= 10;
         this.score.string = "Score: " + this.playerScore.toString();
     }
-
+    
     //spinAgain Button
     spinAgain() {
         //hide the win, lose and spin button
@@ -246,15 +237,11 @@ export default class NewClass extends cc.Component {
     //store score
     storeRes() {
         cc.sys.localStorage.setItem('playerScore', this.playerScore);
-        console.log('com arrrr: ', this.playerScore);
     }
 
     newScene(){
         cc.sys.localStorage.setItem('results', JSON.stringify(this.results));
-        cc.director.loadScene('final'), () => 
-            cc.game.emit('resultData', this.results);
-            console.log('emit final', this.results);
-
+        cc.director.loadScene('final');
     }
 
     nextScene(){

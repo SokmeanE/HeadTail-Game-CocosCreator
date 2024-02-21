@@ -3,7 +3,7 @@ import PrefabForResult from "./PrefabForResult";
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class Result extends cc.Component {
 
     @property(cc.Label)
     player: cc.Label = null;
@@ -43,7 +43,6 @@ export default class NewClass extends cc.Component {
         } else {
             this.result.string = "Failed";
         }
-
         this.setResult(this.resultFinal);
         
     }
@@ -73,7 +72,6 @@ export default class NewClass extends cc.Component {
     }
 
     showTable(resultItem: cc.Node, result: { result: string, player: string, score: number }){
-        
         //set value of prefab children
         let spriteResult = resultItem.getChildByName('Result').getComponent(cc.Sprite);
         let spritePlayer = resultItem.getChildByName('player').getComponent(cc.Sprite);
@@ -81,29 +79,26 @@ export default class NewClass extends cc.Component {
 
         //get component from prefab script
         let sprite = resultItem.getComponent(PrefabForResult);
-            
+
         // check res sprite
         if (result.result == "Gold") {
             spriteResult.spriteFrame = sprite.goldSprite;
         } else if (result.result == "Grey"){
             spriteResult.spriteFrame = sprite.greySprite;
         }
-
         // check player sprite
         if (result.player == "Gold") {
             spritePlayer.spriteFrame = sprite.goldSprite;
         } else if (result.player == "Grey"){
             spritePlayer.spriteFrame = sprite.greySprite;
         }
-
-        
+        //update score value
         labelScore.string = result.score.toString();
 
         // Add the instantiated item to the summary table
         this.summaryTableNode.removeChild(resultItem);
         this.summaryTableNode.addChild(resultItem);
-}
-    
+    }
 
     replayButton() {
         cc.director.loadScene('game');

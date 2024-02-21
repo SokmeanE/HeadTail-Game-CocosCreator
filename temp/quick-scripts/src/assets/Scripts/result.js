@@ -25,9 +25,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var PrefabForResult_1 = require("./PrefabForResult");
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
-var NewClass = /** @class */ (function (_super) {
-    __extends(NewClass, _super);
-    function NewClass() {
+var Result = /** @class */ (function (_super) {
+    __extends(Result, _super);
+    function Result() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.player = null;
         _this.totalScore = null;
@@ -42,7 +42,7 @@ var NewClass = /** @class */ (function (_super) {
         _this.resultFinal = [];
         return _this;
     }
-    NewClass.prototype.onLoad = function () {
+    Result.prototype.onLoad = function () {
         this.player.string = "Player: " + cc.sys.localStorage.getItem('player');
         this.score = cc.sys.localStorage.getItem('playerScore');
         //get result array from mainGame
@@ -57,7 +57,7 @@ var NewClass = /** @class */ (function (_super) {
         }
         this.setResult(this.resultFinal);
     };
-    NewClass.prototype.setResult = function (results) {
+    Result.prototype.setResult = function (results) {
         var _this = this;
         // Set spacing between items 
         var spacingX = 100;
@@ -76,7 +76,7 @@ var NewClass = /** @class */ (function (_super) {
             resultItem.setPosition(col * (resultItem.width + spacingX), -row * (resultItem.height + spacingY));
         });
     };
-    NewClass.prototype.showTable = function (resultItem, result) {
+    Result.prototype.showTable = function (resultItem, result) {
         //set value of prefab children
         var spriteResult = resultItem.getChildByName('Result').getComponent(cc.Sprite);
         var spritePlayer = resultItem.getChildByName('player').getComponent(cc.Sprite);
@@ -97,37 +97,38 @@ var NewClass = /** @class */ (function (_super) {
         else if (result.player == "Grey") {
             spritePlayer.spriteFrame = sprite.greySprite;
         }
+        //update score value
         labelScore.string = result.score.toString();
         // Add the instantiated item to the summary table
         this.summaryTableNode.removeChild(resultItem);
         this.summaryTableNode.addChild(resultItem);
     };
-    NewClass.prototype.replayButton = function () {
+    Result.prototype.replayButton = function () {
         cc.director.loadScene('game');
     };
     __decorate([
         property(cc.Label)
-    ], NewClass.prototype, "player", void 0);
+    ], Result.prototype, "player", void 0);
     __decorate([
         property(cc.Label)
-    ], NewClass.prototype, "totalScore", void 0);
+    ], Result.prototype, "totalScore", void 0);
     __decorate([
         property(cc.Label)
-    ], NewClass.prototype, "result", void 0);
+    ], Result.prototype, "result", void 0);
     __decorate([
         property(cc.Button)
-    ], NewClass.prototype, "replayBtn", void 0);
+    ], Result.prototype, "replayBtn", void 0);
     __decorate([
         property(cc.Prefab)
-    ], NewClass.prototype, "resultPrefab", void 0);
+    ], Result.prototype, "resultPrefab", void 0);
     __decorate([
         property(cc.Node)
-    ], NewClass.prototype, "summaryTableNode", void 0);
-    NewClass = __decorate([
+    ], Result.prototype, "summaryTableNode", void 0);
+    Result = __decorate([
         ccclass
-    ], NewClass);
-    return NewClass;
+    ], Result);
+    return Result;
 }(cc.Component));
-exports.default = NewClass;
+exports.default = Result;
 
 cc._RF.pop();
