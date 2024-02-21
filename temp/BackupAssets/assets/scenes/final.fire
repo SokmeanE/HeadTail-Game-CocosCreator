@@ -1,13 +1,12 @@
 [
   {
     "__type__": "cc.SceneAsset",
-    "_name": "final",
+    "_name": "",
     "_objFlags": 0,
     "_native": "",
     "scene": {
       "__id__": 1
-    },
-    "asyncLoadAssets": false
+    }
   },
   {
     "__type__": "cc.Scene",
@@ -1865,7 +1864,7 @@
       "height": 40
     },
     "_N$startAxis": 0,
-    "_N$paddingLeft": 50,
+    "_N$paddingLeft": 100,
     "_N$paddingRight": 50,
     "_N$paddingTop": 0,
     "_N$paddingBottom": 0,

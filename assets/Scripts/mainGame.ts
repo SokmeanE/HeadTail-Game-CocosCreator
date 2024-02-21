@@ -61,7 +61,7 @@ export default class NewClass extends cc.Component {
         this.spinAgainBtn.active = false;
 
         //set value to attempt
-        this.attempt = 7;
+        this.attempt = 10;
 
         //instance prefab
         this.checkMark = cc.instantiate(this.checkMarkPrefab);

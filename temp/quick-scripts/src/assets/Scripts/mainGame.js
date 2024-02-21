@@ -60,7 +60,7 @@ var NewClass = /** @class */ (function (_super) {
         //hide spinAgain 
         this.spinAgainBtn.active = false;
         //set value to attempt
-        this.attempt = 7;
+        this.attempt = 10;
         //instance prefab
         this.checkMark = cc.instantiate(this.checkMarkPrefab);
         //go botton can't click unit the gold/grey has been selected

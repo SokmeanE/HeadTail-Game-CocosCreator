@@ -59,24 +59,18 @@ var NewClass = /** @class */ (function (_super) {
     };
     NewClass.prototype.setResult = function (results) {
         var _this = this;
-        // Clear existing items in the summary table
-        console.log(results, 'table');
-        //to show last 5 index
-        var totalResults = results.length;
-        var startIndex = totalResults >= 5 ? totalResults - 5 : 0;
-        // Set spacing between items (adjust as needed)
+        // Set spacing between items 
         var spacingX = 100;
         var spacingY = 100;
-        var col = -2.5;
-        results.slice(startIndex).forEach(function (result, index) {
+        var col = -1.5;
+        results.forEach(function (result, index) {
             // Instantiate the prefab
             var resultItem = cc.instantiate(_this.resultPrefab);
             resultItem.x = 0;
             console.log(resultItem.x, 'x position');
-            // Call the updateResult method to set the result details
+            // updateResult 
             _this.showTable(resultItem, result);
-            // this.getComponent('result').showTable(resultItem, result);
-            var row = Math.floor(index / 5);
+            var row = Math.floor(index / index - 1);
             col += 1;
             // Set the position of the resultItem
             resultItem.setPosition(col * (resultItem.width + spacingX), -row * (resultItem.height + spacingY));

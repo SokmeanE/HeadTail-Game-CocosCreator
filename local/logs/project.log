@@ -78,3 +78,17 @@ Node path: "Canvas"
 Asset url: "db://assets/game.fire"
 Missing uuid: "5a691526-c28a-4945-9712-252a3506d5e1"
 
+2024-02-21T06:16:46.060Z - error: Reference "0" of "SpinPrefab" to external scene object "Canvas" can not be saved in prefab asset.
+    at /Applications/Cocos/Creator/2.4.9/CocosCreator.app/Contents/Resources/app.asar/editor/page/scene-utils/utils/prefab.ccc:1:4815
+    at t (/Applications/Cocos/Creator/2.4.9/CocosCreator.app/Contents/Resources/app.asar/editor/page/scene-utils/utils/prefab.ccc:1:4482)
+    at /Applications/Cocos/Creator/2.4.9/CocosCreator.app/Contents/Resources/app.asar/editor/page/scene-utils/utils/prefab.ccc:1:4593
+    at /Applications/Cocos/Creator/2.4.9/CocosCreator.app/Contents/Resources/app.asar/editor/page/scene-utils/utils/prefab.ccc:1:4600
+    at _ (/Applications/Cocos/Creator/2.4.9/CocosCreator.app/Contents/Resources/app.asar/editor/page/scene-utils/utils/prefab.ccc:1:953)
+    at Object.getDumpableNode (/Applications/Cocos/Creator/2.4.9/CocosCreator.app/Contents/Resources/app.asar/editor/page/scene-utils/utils/prefab.ccc:1:4212)
+    at Object.createPrefabFrom (/Applications/Cocos/Creator/2.4.9/CocosCreator.app/Contents/Resources/app.asar/editor/page/scene-utils/utils/prefab.ccc:1:5169)
+    at Object.createPrefab (/Applications/Cocos/Creator/2.4.9/CocosCreator.app/Contents/Resources/app.asar/editor/page/scene-utils/index.ccc:1:4811)
+    at HTMLElement.create-prefab (/Applications/Cocos/Creator/2.4.9/CocosCreator.app/Contents/Resources/app.asar/editor/builtin/scene/panel/messages/scene-operation.ccc:1:3931)
+2024-02-21T06:38:32.502Z - warn: The Asset used by node "SpinPrefab" is missing. Detailed information:
+Node path: "SpinPrefab"
+Missing uuid: "cf80a00e-acaf-4928-8c77-2ed920688f16"
+

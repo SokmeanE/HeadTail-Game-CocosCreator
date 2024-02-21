@@ -50,8 +50,8 @@
     "relativePath": "scenes/starter.fire"
   },
   "32dcd710-a5ab-4277-875b-e5e34bb42065": {
-    "asset": 1708429738988,
-    "meta": 1708429738994,
+    "asset": 1708497516150,
+    "meta": 1708497516155,
     "relativePath": "scenes/game.fire"
   },
   "444b2fd2-789c-4189-959d-65e29b932ae8": {
@@ -60,8 +60,8 @@
     "relativePath": "Scripts"
   },
   "080d3628-49ba-4ff9-a584-50064bd115eb": {
-    "asset": 1708424129644,
-    "meta": 1708424129647,
+    "asset": 1708495991760,
+    "meta": 1708495991766,
     "relativePath": "scenes/final.fire"
   },
   "94bd0fa0-28b6-4103-a63a-ee7ac2196d40": {
@@ -669,11 +669,6 @@
     "meta": 1708427745082,
     "relativePath": "Scripts/PrefabForResult.ts"
   },
-  "f987f25a-2628-4f76-8218-3c260cb7fc9c": {
-    "asset": 1708427715271,
-    "meta": 1708427745122,
-    "relativePath": "Scripts/result.ts"
-  },
   "cb0b4681-d4f9-487f-9666-0b550235fe35": {
     "asset": 1708427763787,
     "meta": 1708427763794,
@@ -685,8 +680,13 @@
     "relativePath": "Animation"
   },
   "1308318d-9227-4f18-ac0d-c90effb4744b": {
-    "asset": 1708428239262,
-    "meta": 1708428240625,
+    "asset": 1708497437927,
+    "meta": 1708497439951,
     "relativePath": "Scripts/mainGame.ts"
+  },
+  "f987f25a-2628-4f76-8218-3c260cb7fc9c": {
+    "asset": 1708499756669,
+    "meta": 1708499772914,
+    "relativePath": "Scripts/result.ts"
   }
 }

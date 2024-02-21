@@ -49,28 +49,21 @@ export default class NewClass extends cc.Component {
     }
 
     setResult(results: { result: string, player: string, score: number }[]) {
-        // Clear existing items in the summary table
-        console.log(results, 'table');
-        
-        //to show last 5 index
-        let totalResults = results.length;
-        let startIndex = totalResults >= 5 ? totalResults - 5 : 0;
-
-        // Set spacing between items (adjust as needed)
+        // Set spacing between items 
         let spacingX = 100;
         let spacingY = 100;
-        let  col = -2.5
-        results.slice(startIndex).forEach((result, index) => {
+        let  col = -1.5
+
+        results.forEach((result, index) => {
             // Instantiate the prefab
             let resultItem = cc.instantiate(this.resultPrefab);
             resultItem.x = 0;
             console.log(resultItem.x, 'x position');
-            // Call the updateResult method to set the result details
 
+            // updateResult 
             this.showTable(resultItem, result);
-            // this.getComponent('result').showTable(resultItem, result);
             
-            let row = Math.floor(index / 5);  
+            let row = Math.floor(index / index - 1);  
             col += 1; 
 
             // Set the position of the resultItem
