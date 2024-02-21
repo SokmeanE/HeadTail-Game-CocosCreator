@@ -5,7 +5,7 @@
   "_native": "",
   "_duration": 0.25,
   "sample": 60,
-  "speed": 1,
+  "speed": 2,
   "wrapMode": 2,
   "curveData": {
     "props": {
@@ -36,7 +36,8 @@
         },
         {
           "frame": 0.2,
-          "value": 255
+          "value": 255,
+          "curve": "linear"
         },
         {
           "frame": 0.23333333333333334,

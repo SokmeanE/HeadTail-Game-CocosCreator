@@ -1,6 +1,6 @@
 
 (function () {
-var scripts = [{"deps":{"./assets/Scripts/startGame":1,"./assets/Scripts/mainGame":2,"./assets/Scripts/result":3},"path":"preview-scripts/__qc_index__.js"},{"deps":{},"path":"preview-scripts/assets/Scripts/startGame.js"},{"deps":{},"path":"preview-scripts/assets/Scripts/mainGame.js"},{"deps":{},"path":"preview-scripts/assets/Scripts/result.js"}];
+var scripts = [{"deps":{"./assets/Scripts/result":2,"./assets/Scripts/startGame":3,"./assets/Scripts/PrefabForResult":4,"./assets/Scripts/mainGame":1},"path":"preview-scripts/__qc_index__.js"},{"deps":{},"path":"preview-scripts/assets/Scripts/mainGame.js"},{"deps":{"./PrefabForResult":4},"path":"preview-scripts/assets/Scripts/result.js"},{"deps":{},"path":"preview-scripts/assets/Scripts/startGame.js"},{"deps":{},"path":"preview-scripts/assets/Scripts/PrefabForResult.js"}];
 var entries = ["preview-scripts/__qc_index__.js"];
 var bundleScript = 'preview-scripts/__qc_bundle__.js';
 

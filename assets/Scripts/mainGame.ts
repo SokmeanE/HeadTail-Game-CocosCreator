@@ -9,9 +9,6 @@ export default class NewClass extends cc.Component {
     @property(cc.Label)
     showAttempt: cc.Label = null;
 
-    @property
-    attempt: number = null;
-
     @property(cc.Node)
     grey: cc.Node = null;
 
@@ -20,13 +17,10 @@ export default class NewClass extends cc.Component {
 
     @property(cc.Node)
     choiceBtn: cc.Node = null;
-    randomResult: string = null;
 
-    @property(cc.Node)
-    winText: cc.Node = null;
-
-    @property(cc.Node)
-    loseText: cc.Node = null;
+    @property(cc.Prefab)
+    winLosePrefab: cc.Prefab = null;
+    winLoseNode: cc.Node = null;
 
     @property(cc.Node)
     spinAgainBtn: cc.Node = null;
@@ -34,33 +28,44 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     spinFeather: cc.Node = null;
 
-    @property(cc.Node)
-    greyCheck: cc.Node = null;
+    @property(cc.Toggle)
+    isSpeedUp: cc.Toggle = null;
 
-    @property(cc.Node)
-    goldCheck: cc.Node = null;
+    @property(cc.Label)
+    speedText: cc.Label = null;
+
+    @property(cc.Prefab)
+    checkMarkPrefab: cc.Prefab = null;
+    checkMark: cc.Node = null;
 
     @property(cc.Label)
     score: cc.Label = null;
-    playerScore: number = 0;
+    playerScore: number = null;
+    attempt: number = null;
     choice: string = '';
     randomChoice: string = '';
-    randomDelay: number;
+    randomGold: number = 0;
+    randomGrey: number = 0;
+    results: any[] = [];
+    
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
         //get player name
         this.getPlayerName();
+        this.playerScore = 100;
+        this.score.string = "Score: " + this.playerScore.toString();
 
-        //hide win and lose, spinAgain 
-        this.winText.active = false;
-        this.loseText.active = false;
+        //hide spinAgain 
         this.spinAgainBtn.active = false;
 
-        //set value to attempt and score
-        this.attempt = 10;
-        this.playerScore = 0;
+        //set value to attempt
+        this.attempt = 7;
+
+        //instance prefab
+        this.checkMark = cc.instantiate(this.checkMarkPrefab);
+        
 
         //go botton can't click unit the gold/grey has been selected
         this.choiceBtn.getComponent(cc.Button).interactable = false;
@@ -72,14 +77,13 @@ export default class NewClass extends cc.Component {
         this.playerName.string = cc.sys.localStorage.getItem('player').toString();
     }
 
-
     greyBtn() {
         //if click set choice to grey
         this.choice = "Grey";
-        console.log('on', this.choice);
 
         //check remark
-        this.greyCheck.active = true;
+        this.node.addChild(this.checkMark);
+        this.checkMark.setPosition(-220, -200, 0); 
 
         //interactable button
         this.grey.getComponent(cc.Button).interactable = false;
@@ -90,10 +94,12 @@ export default class NewClass extends cc.Component {
     goldBtn() {
         //if click set choice to gold
         this.choice = "Gold";
-        console.log('off', this.choice);
 
         //check remark
-        this.goldCheck.active = true;
+        this.node.addChild(this.checkMark);
+        this.checkMark.setPosition(360, -215, 0); 
+        this.checkMark.angle = -10;
+
 
         //interactable button
         this.gold.getComponent(cc.Button).interactable = false;
@@ -102,20 +108,31 @@ export default class NewClass extends cc.Component {
     }
 
     goBtn() {
+        this.node.removeChild(this.checkMark);
+
+        //deduction 10 for play
+        this.attempt -= 1;
+        this.showAttempt.string = "Attempt: " + this.attempt.toString();
+        this.deduction();
+
         //onclick play aniamtion
         this.playAnimation();
+        
+        
         // check attempt
-        if (this.attempt == 0) {
-            this.storeScore();
+            if(this.attempt == 0){
+                this.storeRes();
             setTimeout(() => {
                 this.newScene();  
-            },6500);
+            }, (this.isSpeedUp.isChecked == true) ? 3000 : 5500);
         }
         this.choiceBtn.getComponent(cc.Button).interactable = false;
     }
 
     playAnimation() {
 
+        //new logic
+        console.log('play animation');
         //new logic
         let result = Math.random();
         if(result >= 0.5){
@@ -127,68 +144,98 @@ export default class NewClass extends cc.Component {
         //play animation
         var anim = this.spinFeather.getComponent(cc.Animation);
         anim.play();
+         if (this.isSpeedUp.isChecked == false){
+             //normal speed
+            this.randomGold = (Math.random() * (250 - 180) + 180);
+            this.randomGrey = (Math.random() * (120 - 60) + 60);
+            anim.getAnimationState('featherAnim').speed = 1;
 
-        const randomGold = (Math.random() * (250 - 180) + 180);
-        const randomGrey = Math.random() * (120 - 60) + 60;
+            if(this.randomChoice == "Gold"){
+                setTimeout(() => {
+                    anim.stop();
+                }, this.randomGold + 5000);
+            } else {
+                setTimeout(() => {
+                    anim.stop()
+                }, this.randomGrey + 5000);
+            }
 
+         } else {
+            //speedup
+            anim.getAnimationState('featherAnim').speed = 2;
+            this.randomGold = (Math.random() * (125 - 90) + 90) + 2500;
+            this.randomGrey = (Math.random() * (60 - 30) + 30) + 2500;
+
+            if(this.randomChoice == "Gold"){
+                setTimeout(() => {
+                    anim.stop();
+                }, this.randomGold);
+            } else {
+                setTimeout(() => {
+                    anim.stop()
+                }, this.randomGrey);
+            }
+         }
         
-        //pause animation
-        if(this.randomChoice == "Gold"){
-            setTimeout(() => {
-                anim.stop();
-            }, randomGold + 5000);
-        } else {
-            setTimeout(() => {
-                anim.stop()
-            }, randomGrey + 5000);
-        }
         
         this.compareChoice(this.choice);
     }
 
 
     compareChoice(choice: string) {
+        this.winLose();
+        let winLostLabel = this.winLoseNode.getComponent(cc.Label);
         //compare choice to computer
-        if (this.randomChoice == this.choice) {
+        if (this.randomChoice == choice) {
+            //push result to array
+            this.results.push({ result: this.randomChoice, player: this.choice, score: 10 });
             //set a delay then do 1 & 2
             setTimeout(() => {
                 //1. show win and spin 
-                this.winText.active = true;
-                if(this.attempt > 0){
+                winLostLabel.string = "You Win";
+                if(this.playerScore > 0){
                     this.spinAgainBtn.active = true;
                 }
                 //2. add score
                 this.gainScore();
-            }, 5100);
+            }, (this.isSpeedUp.isChecked == true) ? 2600 : 5100);
 
         } else {
+            //result to array
+            this.results.push({ result: this.randomChoice, player: this.choice, score: -10 });
             setTimeout(() => {
-                this.loseText.active = true;
-                if(this.attempt > 0){
+                winLostLabel.string = "You Lose";
+                if(this.playerScore > 0){
                     this.spinAgainBtn.active = true;
                 }
-            }, 5100);
+            }, (this.isSpeedUp.isChecked == true) ? 2600 : 5100);
         }
+        
+    }
 
-        //decrease the attempt 
-        this.attempt -= 1;
-        this.showAttempt.string = "Attempt: " + this.attempt.toString();
+    //display win or lost
+    winLose(){
+        this.winLoseNode = cc.instantiate(this.winLosePrefab);
+        this.winLoseNode.setPosition(0,160,-1);
+        this.node.addChild(this.winLoseNode);
     }
 
     //add score
     gainScore() {
-        this.playerScore += 1;
+        this.playerScore += 20;
         this.score.string = "Score: " + this.playerScore.toString();
     }
 
-    spinAgain() {
-        //diable check remark
-        this.greyCheck.active = false;
-        this.goldCheck.active = false;
+    //deduct score 
+    deduction(){
+        this.playerScore -= 10;
+        this.score.string = "Score: " + this.playerScore.toString();
+    }
 
+    //spinAgain Button
+    spinAgain() {
         //hide the win, lose and spin button
-        this.winText.active = false;
-        this.loseText.active = false;
+        this.node.removeChild(this.winLoseNode);
         this.spinAgainBtn.active = false;
 
         //enabel button
@@ -197,11 +244,20 @@ export default class NewClass extends cc.Component {
     }
 
     //store score
-    storeScore() {
+    storeRes() {
         cc.sys.localStorage.setItem('playerScore', this.playerScore);
+        console.log('com arrrr: ', this.playerScore);
     }
 
     newScene(){
-        cc.director.loadScene('final');
+        cc.sys.localStorage.setItem('results', JSON.stringify(this.results));
+        cc.director.loadScene('final'), () => 
+            cc.game.emit('resultData', this.results);
+            console.log('emit final', this.results);
+
+    }
+
+    nextScene(){
+        this.newScene();
     }
 }

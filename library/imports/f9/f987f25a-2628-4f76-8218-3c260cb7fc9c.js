@@ -23,6 +23,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var PrefabForResult_1 = require("./PrefabForResult");
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var NewClass = /** @class */ (function (_super) {
     __extends(NewClass, _super);
@@ -33,29 +34,79 @@ var NewClass = /** @class */ (function (_super) {
         _this.score = null;
         _this.result = null;
         _this.replayBtn = null;
+        _this.resultPrefab = null;
+        _this.summaryTableNode = null;
+        _this.spriteNodeG = null;
+        _this.spriteNodeR = null;
+        _this.res = null;
+        _this.resultFinal = [];
         return _this;
     }
-    // LIFE-CYCLE CALLBACKS:
     NewClass.prototype.onLoad = function () {
         this.player.string = "Player: " + cc.sys.localStorage.getItem('player');
         this.score = cc.sys.localStorage.getItem('playerScore');
-        this.playRes();
-    };
-    NewClass.prototype.playRes = function () {
+        //get result array from mainGame
+        var strngArr = cc.sys.localStorage.getItem('results');
+        this.resultFinal = JSON.parse(strngArr);
         this.totalScore.string = "Score: " + this.score.toString();
-        console.log('score in final', this.score);
-        if (this.score == 10) {
+        if (this.score >= 200) {
             this.result.string = "Expert";
-        }
-        else if (this.score >= 8) {
-            this.result.string = "Good";
-        }
-        else if (this.score >= 5) {
-            this.result.string = "Normal";
         }
         else {
             this.result.string = "Failed";
         }
+        this.setResult(this.resultFinal);
+    };
+    NewClass.prototype.setResult = function (results) {
+        var _this = this;
+        // Clear existing items in the summary table
+        console.log(results, 'table');
+        //to show last 5 index
+        var totalResults = results.length;
+        var startIndex = totalResults >= 5 ? totalResults - 5 : 0;
+        // Set spacing between items (adjust as needed)
+        var spacingX = 100;
+        var spacingY = 100;
+        var col = -2.5;
+        results.slice(startIndex).forEach(function (result, index) {
+            // Instantiate the prefab
+            var resultItem = cc.instantiate(_this.resultPrefab);
+            resultItem.x = 0;
+            console.log(resultItem.x, 'x position');
+            // Call the updateResult method to set the result details
+            _this.showTable(resultItem, result);
+            // this.getComponent('result').showTable(resultItem, result);
+            var row = Math.floor(index / 5);
+            col += 1;
+            // Set the position of the resultItem
+            resultItem.setPosition(col * (resultItem.width + spacingX), -row * (resultItem.height + spacingY));
+        });
+    };
+    NewClass.prototype.showTable = function (resultItem, result) {
+        //set value of prefab children
+        var spriteResult = resultItem.getChildByName('Result').getComponent(cc.Sprite);
+        var spritePlayer = resultItem.getChildByName('player').getComponent(cc.Sprite);
+        var labelScore = resultItem.getChildByName('Score').getComponent(cc.Label);
+        //get component from prefab script
+        var sprite = resultItem.getComponent(PrefabForResult_1.default);
+        // check res sprite
+        if (result.result == "Gold") {
+            spriteResult.spriteFrame = sprite.goldSprite;
+        }
+        else if (result.result == "Grey") {
+            spriteResult.spriteFrame = sprite.greySprite;
+        }
+        // check player sprite
+        if (result.player == "Gold") {
+            spritePlayer.spriteFrame = sprite.goldSprite;
+        }
+        else if (result.player == "Grey") {
+            spritePlayer.spriteFrame = sprite.greySprite;
+        }
+        labelScore.string = result.score.toString();
+        // Add the instantiated item to the summary table
+        this.summaryTableNode.removeChild(resultItem);
+        this.summaryTableNode.addChild(resultItem);
     };
     NewClass.prototype.replayButton = function () {
         cc.director.loadScene('game');
@@ -72,6 +123,12 @@ var NewClass = /** @class */ (function (_super) {
     __decorate([
         property(cc.Button)
     ], NewClass.prototype, "replayBtn", void 0);
+    __decorate([
+        property(cc.Prefab)
+    ], NewClass.prototype, "resultPrefab", void 0);
+    __decorate([
+        property(cc.Node)
+    ], NewClass.prototype, "summaryTableNode", void 0);
     NewClass = __decorate([
         ccclass
     ], NewClass);

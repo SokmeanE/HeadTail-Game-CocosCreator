@@ -10,6 +10,7 @@
                     };
                     function __define (exports, require, module) {
                         if (!nodeEnv) {__quick_compile_project__.registerModule(__filename, module);}
+require('./assets/Scripts/PrefabForResult');
 require('./assets/Scripts/mainGame');
 require('./assets/Scripts/result');
 require('./assets/Scripts/startGame');
